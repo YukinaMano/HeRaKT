@@ -1,0 +1,16 @@
+/data
+/datasets
+/logs
+/log
+/checkpoint
+/results
+/.vscode
+
+__pycache__
+
+.txt
+.pyc
+.npy
+.code-workspace
+
+*test*.py
