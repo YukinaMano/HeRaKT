@@ -55,6 +55,10 @@ def load_model_args():
     arg_parser.add_argument('--trans_forward_d', type=int, default=512, help='Dimension of Transformer feed-forward network')
     arg_parser.add_argument('--encoder_l', type=int, default=3, help='Number of Transformer encoder layers')
     arg_parser.add_argument('--decoder_l', type=int, default=1, help='Number of Transformer decoder layers')
+    arg_parser.add_argument("--pos_l", type=int, default=1, help='positive layer num')
+    arg_parser.add_argument("--neg_l", type=int, default=1, help='negative layer num')
+    arg_parser.add_argument("--q_sparsity", type=float, default=0.50, help='question sparsity')
+    arg_parser.add_argument("--s_sparsity", type=float, default=0.75, help='skill sparsity')
     # Experiment Setting
     arg_parser.add_argument('--use_device', type=str, default='gpu', choices=['cpu', 'gpu'])
     arg_parser.add_argument('--device_id', type=int, default=0, help='valid only when use_device is gpu')
