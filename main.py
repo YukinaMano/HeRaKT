@@ -3,6 +3,7 @@ import os
 import random
 import torch
 import numpy as np
+from utils.readin import data_preprocess
 
 
 def load_model_args():
@@ -87,3 +88,4 @@ if __name__ == '__main__':
     args = load_model_args()
     init_certain_seed(args.random_seed)
     load_device(args)
+    exp_args, exp_data = data_preprocess(args)
