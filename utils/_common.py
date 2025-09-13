@@ -2,8 +2,10 @@
 import os
 import torch
 
-# printing information in development mode
 def print_debug(objects):
+    '''
+    printing information in development mode
+    '''
     DEBUG_MODE = True
     '''
     SELECT[DEBUG_MODE]===>
@@ -13,14 +15,19 @@ def print_debug(objects):
     if DEBUG_MODE:
         print('DEBUG:', objects)
 
-# check if the file path exists, if not, create a path
+
 def check_dir(path: str):
+    '''
+    check if the file path exists, if not, create a path
+    '''
     directory, filename = os.path.split(path)
     if not os.path.isdir(directory):
         os.makedirs(directory)
 
-# obtain CUDA device
 def get_pytorch_device(use_device='gpu', device_id=0):
+    '''
+    obtain CUDA device
+    '''
     import torch
     device = torch.device("cpu")
     if use_device == 'gpu' and torch.cuda.is_available():
@@ -32,8 +39,10 @@ def get_pytorch_device(use_device='gpu', device_id=0):
     print(" ")
     return device
 
-# check CUDA device
 def check_pytorch_device():
+    '''
+    check CUDA device
+    '''
     device = get_pytorch_device()
     print(f"Current pytorch device: {device}")
     print(torch.__version__)                # Check the installed PyTorch version
