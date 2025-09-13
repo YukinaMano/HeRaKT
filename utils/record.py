@@ -24,6 +24,23 @@ def save_exp_args(args) -> str:
     print_debug(f'Model Args: {config}')
     return config_path
 
+def save_exp_data(data, args):
+    '''
+    save experimental data to a txt file
+    '''
+    log_dir = args.log_dir
+    tag = args.tag 
+    dataset = args.dataset
+    title = 'info-data'
+    dataset_dir = os.path.join(log_dir, dataset)
+    tag_path = os.path.join(dataset_dir, f'{title}_{dataset}_{tag}.txt')
+    check_dir(tag_path)
+    with open(tag_path, 'w') as file:
+        for key, value in vars(data).items():
+            # Write key-value pairs to a file in the format of 'k: v'
+            file.write(f"{key}: {value}\n")
+    print_debug(f'\n>>>[Completed] save exp data to {tag_path}')
+
 def save_best_model(model_params: dict, model_name: str, dataset=''):
     '''
     save the best model parameters to the checkpoint directory
