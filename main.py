@@ -3,6 +3,7 @@ import os
 import random
 import torch
 import numpy as np
+from train import train
 from utils.readin import data_preprocess
 
 
@@ -89,3 +90,4 @@ if __name__ == '__main__':
     init_certain_seed(args.random_seed)
     load_device(args)
     exp_args, exp_data = data_preprocess(args)
+    train(exp_args, exp_data)
