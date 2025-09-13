@@ -18,7 +18,7 @@ def load_model_args():
         '--dataset',
         type=str,
         default='assist2009',
-        choices=['assist2009', 'assist12_3', 'ednet', 'assist09_3', 'ednet_5000_3', 'csedm', 'junyi_3']
+        choices=['assist2009', 'assist12_3', 'ednet', 'assist09_3', 'assist2017', 'ednet_5000_3', 'csedm', 'junyi_3']
     )
     arg_parser.add_argument('--max_step', type=int, default=200)
     arg_parser.add_argument('--question_neighbor_num', type=int, default=4)
