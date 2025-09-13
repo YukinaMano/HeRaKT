@@ -121,18 +121,18 @@ def check_knowledge_tracking_data(seqs_lis: list, seqs_structured=False):
     s_min = min(skl_fea_cnt.keys())
     a_max = max(ans_fea_cnt.keys())
     a_min = min(ans_fea_cnt.keys())
-    # 范围信息统计
+    # conduct scope information statistics
     print_debug('\n\n----------- Data Check ------------')
     print_debug(f'The range of seq-len is [{min(seq_len_cnt.keys())}:{max(seq_len_cnt.keys())}]')
     print_debug(f'The range of skill ID is [{min(skl_fea_cnt.keys())}:{max(skl_fea_cnt.keys())}]')
     print_debug(f'The range of questions ID is [{min(qst_fea_cnt.keys())}:{max(qst_fea_cnt.keys())}]')
     print_debug(f'The range of answer tag is [{min(ans_fea_cnt.keys())}:{max(ans_fea_cnt.keys())}]')
-    # 计数信息统计
+    # conduct count information statistics
     print_debug(f'The number of seq-len is {len(seq_len_cnt)}')
     print_debug(f'The number of skills is {len(skl_fea_cnt)}')
     print_debug(f'The number of questions is {len(qst_fea_cnt)}')
     print_debug(f'The number of answer is {ans_fea_cnt}')
-    # 序列信息统计
+    # conduct sequence information statistics
     print_debug(f'The number of seq is {sum(seq_len_cnt.values())}')
     print_debug(f'The number of (s, q, a) is {sum(qst_fea_cnt.values())}')
 
