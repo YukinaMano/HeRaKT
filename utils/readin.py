@@ -144,7 +144,7 @@ def get_data_from_structured_csv(data_path: str, structure_label: list) -> list:
             processed_data = []
             for item in row[label].split(','):
                 sub_items = item.split('_')  # processing arrays separated by '_'
-                processed_data.append(list(map(int, (sub_items[0]))))  # only take the first element
+                processed_data.append(list(map(int, (sub_items))))  # only take the first element
             label_lis.append(processed_data)
         
         seq = [list(row) for row in zip(*label_lis)]
