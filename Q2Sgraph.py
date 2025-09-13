@@ -10,4 +10,4 @@ class Q2SGraph:
         '''
         Add edges to the graph from structured sequences.
         '''
-        pass
+        return self
