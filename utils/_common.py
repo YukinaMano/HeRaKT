@@ -28,7 +28,6 @@ def get_pytorch_device(use_device='gpu', device_id=0):
     '''
     obtain CUDA device
     '''
-    import torch
     device = torch.device("cpu")
     if use_device == 'gpu' and torch.cuda.is_available():
         torch.cuda.set_device(device_id)
