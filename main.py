@@ -37,7 +37,8 @@ def load_model_args():
     arg_parser.add_argument('--action', type=str, default='train', choices=['train', 'eval'])
     arg_parser.add_argument('--train_strategy', type=str, default='ALL_STEP', choices=['ALL_STEP', 'LAST_STEP', 'MASK_LEARNING'])
     arg_parser.add_argument('--inference_program', type=str, default='MASK_TARGET', choices=['ALL_STEP', 'MASK_TARGET', 'REVERSE_TARGET', 'RANDOM_MASK', 'SAME_MASK', 'DIFFERENT_MASK'])
-    arg_parser.add_argument('--intv_ratio', type=float, default=0.15, help='the mask ratio for RANDOM_MASK, SAME_MASK, DIFFERENT_MASK')
+    arg_parser.add_argument('--intv_ratio', type=float, default=0.15, help='the intv ratio for RANDOM_MASK, SAME_MASK, DIFFERENT_MASK')
+    arg_parser.add_argument('--mask_ratio', type=float, default=0.30, help='the mask ratio for MASK_LEARNING')
     # Model
     arg_parser.add_argument('--padding_idx', type=int, default=0, help='Value used for padding')
     arg_parser.add_argument('--embedding_size', type=int, default=256)
