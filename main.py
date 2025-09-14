@@ -81,13 +81,8 @@ def init_certain_seed(seed=42):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-def load_device(args):
-    if args.use_device == 'gpu':
-        torch.cuda.set_device(args.device_id)
-
 if __name__ == '__main__':
     args = load_model_args()
     init_certain_seed(args.random_seed)
-    load_device(args)
     exp_args, exp_data = data_preprocess(args)
     train(exp_args, exp_data)
