@@ -38,7 +38,7 @@ class TrainModel(nn.Module):
         self.predict_size = 1
         self.dropout = args.dropout
         # experiment setting
-        self.UNKNOWN_ID = args.a_range
+        self.UNKNOWN_ID = 3
         self.train_strategy = args.train_strategy
         self.inference_program = args.inference_program
         self.mask_ratio = args.mask_ratio
