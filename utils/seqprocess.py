@@ -254,3 +254,28 @@ def unpack_structured_data(structured_seqs_lis: list, to_get_graph=False, q_size
     graph_obj.G_bi = G_bi
     return seqs_lis, graph_obj
 
+def compute_q_difficulty(seqs_lis: list, q_size: int, default_difficulty=0.5) -> list[float]:
+    '''
+    compute the difficulty of all questions from the KT sequence [seqs_lis].
+    Args:
+        seqs_lis(list{S, L, 3}(int)): the id of (s, q, a) in KT seqs
+        q_size(int): the number of questions
+        default_difficulty(float): the default difficulty of the question, apply it if no data is available
+    Returns:
+        list{Q}(float): the difficulty of each question
+    '''
+    q_difficulty = [default_difficulty] * q_size
+    q_num_cnt = [0] * q_size
+    a_num_cnt = [0] * q_size
+    for seq in seqs_lis:
+        for s, q, a in seq:
+            if a not in (0, 1):
+                raise ValueError(f"a must be 0 or 1, but got {a} in question {q}")
+            q_num_cnt[q] += 1
+            a_num_cnt[q] += a
+    for q in range(q_size):
+        if q_num_cnt[q] == 0:
+            continue
+        q_difficulty[q] = 1 - a_num_cnt[q] / q_num_cnt[q]
+
+    return q_difficulty
