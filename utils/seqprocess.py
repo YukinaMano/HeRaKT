@@ -1,5 +1,5 @@
 # @AlaoCode#> This module places the methods used to process sequences
-
+import numpy as np
 from collections import Counter
 from types import SimpleNamespace
 from Q2Sgraph import Q2SGraph
@@ -279,3 +279,38 @@ def compute_q_difficulty(seqs_lis: list, q_size: int, default_difficulty=0.5) ->
         q_difficulty[q] = 1 - a_num_cnt[q] / q_num_cnt[q]
 
     return q_difficulty
+
+def compute_q2q_sim_matrix(seqs_lis: list[list[tuple[int, int, int]]], q_size: int) -> np.ndarray:
+    '''
+    Compute the question-question (q2q) similarity matrix using a LightGCN-style normalized co-occurrence adjacency.
+    Args:
+        seqs_lis (list{S, L, 3}(int)): The id of (s, q, a) in KT seqs, where only q is used
+        q_size (int): Number of questions Q
+    Returns:
+        np.ndarray{Q, Q}(float32): Normalized q2q similarity matrix where
+            S[i, j] = co_occurrence(i, j) / sqrt(freq(i) * freq(j)),
+            and the diagonal is set to 1.0.
+    '''
+    q2q_count = np.zeros((q_size, q_size), dtype=np.float32)
+    q_freq = np.zeros(q_size, dtype=np.int32)
+
+    for seq in seqs_lis:
+        # All questions can be counted at most once per sequence
+        unique_qs = np.fromiter({q for _, q, _ in seq}, dtype=np.int64)
+        if unique_qs.size == 0:
+            continue
+        q_freq[unique_qs] += 1
+        q2q_count[np.ix_(unique_qs, unique_qs)] += 1.0
+    # Avoid division by zero in normalization
+    denom = np.sqrt(q_freq, dtype=np.float32)
+    denom[denom == 0] = 1.0
+    # Normalize: S[i, j] = count[i, j] / sqrt(freq[i] * freq[j])
+    q2q_sim_matrix = q2q_count / (denom[:, None] * denom[None, :])
+    np.fill_diagonal(q2q_sim_matrix, 1.0)
+    # (Development) Print a rough distribution of similarity values for quick inspection
+    bins = [0.0, 1e-8, 0.2, 0.4, 0.6, 0.8, 1.0]
+    hist, _ = np.histogram(q2q_sim_matrix, bins=bins)
+    distribution = {f'[{bins[i]:.1f}, {bins[i+1]:.1f})': int(hist[i]) for i in range(len(hist))}
+    print_debug(distribution)
+
+    return q2q_sim_matrix
