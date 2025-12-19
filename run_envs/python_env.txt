@@ -1,0 +1,12 @@
+--index-url https://pypi.org/simple
+info-nce-pytorch==0.1.4
+torch-geometric==2.6.1
+pandas==2.2.3
+numpy==1.22.4
+networkx==3.2.1
+gensim==4.2.0
+scipy==1.10.1
+smart_open==5.2.1
+tqdm==4.64.1
+scikit-learn==1.2.2
+sympy==1.13.1

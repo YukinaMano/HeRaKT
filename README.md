@@ -4,7 +4,7 @@ There is the project for paper "HeRaKT: Heterogeneous bidirectional modeling for
 # Experimental environment
 ubuntu=20.04.6  
 python=3.9.20  
-cuda=11.8
+cuda=12.1
 
 Please download the environment before running the project.
 ```
@@ -26,5 +26,7 @@ There are other datasets for reference only
 # Command
 Run the local project. 
 ```
-python main.py --dataset assist12_3 --model herakt --num_epochs 200 --batch_size 64 --device_id 2
+python main.py --model herakt --dataset assist2009 
+python main.py --model herakt --dataset assist12_3 
+python main.py --model herakt --dataset ednet
 ```
